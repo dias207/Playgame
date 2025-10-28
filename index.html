@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Гонка на машинах</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="app__header">
+      <h1>Гонка: выбери машину</h1>
+    </header>
+
+    
+
+    <section class="track" aria-label="Трасса">
+      <div class="finish-line" aria-hidden="true"></div>
+      <div class="lane" data-lane="0"><div class="car" data-car="0" data-name="Диас" style="--car-color:#e74c3c"><span class="car__body"><span class="car__roof"></span><span class="car__window"></span><span class="car__light car__light--front"></span><span class="car__light car__light--rear"></span></span><span class="car__name">Диас</span></div></div>
+      <div class="lane" data-lane="1"><div class="car" data-car="1" data-name="Рахым" style="--car-color:#f1c40f"><span class="car__body"><span class="car__roof"></span><span class="car__window"></span><span class="car__light car__light--front"></span><span class="car__light car__light--rear"></span></span><span class="car__name">Рахым</span></div></div>
+      <div class="lane" data-lane="2"><div class="car" data-car="2" data-name="Алмат" style="--car-color:#2ecc71"><span class="car__body"><span class="car__roof"></span><span class="car__window"></span><span class="car__light car__light--front"></span><span class="car__light car__light--rear"></span></span><span class="car__name">Алмат</span></div></div>
+      <div class="lane" data-lane="3"><div class="car" data-car="3" data-name="Асыл" style="--car-color:#ff69b4"><span class="car__body"><span class="car__roof"></span><span class="car__window"></span><span class="car__light car__light--front"></span><span class="car__light car__light--rear"></span></span><span class="car__name">Асыл</span></div></div>
+      <div class="lane" data-lane="4"><div class="car" data-car="4" data-name="Мирас" style="--car-color:#9b59b6"><span class="car__body"><span class="car__roof"></span><span class="car__window"></span><span class="car__light car__light--front"></span><span class="car__light car__light--rear"></span></span><span class="car__name">Мирас</span></div></div>
+    </section>
+
+    <div id="result" class="result" role="alert" aria-live="polite" hidden></div>
+
+    <section class="controls" aria-label="Панель управления">
+      <div class="drive" role="group" aria-label="Кнопки ускорения">
+        <button class="btn drive-btn" data-car="0" style="--car-color:#e74c3c">Диас</button>
+        <button class="btn drive-btn" data-car="1" style="--car-color:#f1c40f">Рахым</button>
+        <button class="btn drive-btn" data-car="2" style="--car-color:#2ecc71">Алмат</button>
+        <button class="btn drive-btn" data-car="3" style="--car-color:#ff69b4">Асыл</button>
+        <button class="btn drive-btn" data-car="4" style="--car-color:#9b59b6">Мирас</button>
+      </div>
+      <div class="buttons">
+        <button id="resetBtn" class="btn">Сброс</button>
+      </div>
+    </section>
+
+    <footer class="app__footer">
+      <span>Удачи на трассе!</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

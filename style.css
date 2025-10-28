@@ -1,0 +1,107 @@
+:root {
+  --bg: #0f1220;
+  --panel: #151934;
+  --text: #ecf0f1;
+  --muted: #9aa3b2;
+  --accent: #ff7b54;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1000px 600px at 80% -100px, #1e2350 0%, transparent 60%), var(--bg);
+}
+
+.app { min-height: 100%; display: grid; grid-template-rows: auto auto 1fr auto; gap: 16px; }
+
+.app__header, .app__footer {
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #141936 0%, #0f1226 100%);
+  border-bottom: 1px solid #22284e;
+}
+.app__footer { border-top: 1px solid #22284e; border-bottom: none; }
+.app__header h1 { margin: 0; font-size: 22px; letter-spacing: 0.3px; }
+
+.controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; position: sticky; bottom: 0; background: rgba(15,18,32,.85); backdrop-filter: blur(6px); border-top: 1px solid #22284e; }
+.drive { display: grid; grid-template-columns: repeat(5, minmax(120px, 1fr)); gap: 12px; width: 100%; }
+.drive-btn { border: 2px solid #2a2f5a; background: color-mix(in oklab, var(--car-color), #0f1220 60%); }
+.drive-btn:hover { filter: brightness(1.05); }
+
+.buttons { display: flex; gap: 10px; }
+.btn {
+  background: #2a2f5a; color: var(--text); border: 1px solid #39407a; padding: 14px 18px; border-radius: 10px;
+  cursor: pointer; transition: transform .1s ease, background .2s ease, opacity .2s ease; font-weight: 600;
+}
+.btn.primary { background: linear-gradient(90deg, #ff7b54, #ffad60); border-color: #ff965a; color: #09101f; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn:not(:disabled):active { transform: translateY(1px); }
+
+.track {
+  position: relative; margin: 0 20px 20px; padding: 18px 0 26px 0; border-radius: 14px; background: var(--panel);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.finish-line {
+  position: absolute; right: 70px; top: 0; bottom: 0; width: 16px; display: grid; grid-template-rows: repeat(20, 1fr); filter: drop-shadow(0 0 6px rgba(0,0,0,.5));
+}
+.finish-line::before, .finish-line::after {
+  content: ""; grid-row: 1 / -1; background-image: linear-gradient(0deg, #eee 25%, transparent 25%, transparent 50%, #eee 50%, #eee 75%, transparent 75%, transparent);
+  background-size: 16px 16px; display: block;
+}
+
+.lane { position: relative; height: 120px; border-top: 1px dashed #39407a; border-bottom: 1px dashed #1d2248; display: flex; align-items: center; }
+.lane:first-of-type { border-top-color: transparent; }
+.lane:last-of-type { border-bottom-color: transparent; }
+
+.car {
+  --car-color: #ff7b54; --size: 92px;
+  position: absolute; left: 16px; width: calc(var(--size) * 2.4); height: var(--size);
+  border-radius: 12px; background: transparent;
+  box-shadow: 0 10px 20px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+.car__body, .car__roof, .car__window, .car__light { display: none; }
+.car::after { animation: wheel-spin 0.35s linear infinite; }
+@keyframes wheel-spin { from { box-shadow: 0 0 0 3px #333b76 inset; } to { box-shadow: 0 0 0 3px #1d2248 inset; } }
+.car.moving { filter: saturate(1.25) drop-shadow(0 0 8px rgba(255,173,96,.35)); transform: translateX(var(--x, 0)) scale(1.02); }
+.car__img { display: none; }
+.car.has-photo::before, .car.has-photo::after { display: block; }
+.car__name { position: absolute; left: 50%; transform: translateX(-50%); top: -36px; font-size: 12px; color: var(--muted); font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,.6); white-space: nowrap; }
+.car::before, .car::after { display: none; }
+.car::before {
+  display: block;
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f697.svg');
+  background-repeat: no-repeat; background-size: contain; background-position: left center;
+  transform: scaleX(-1);
+}
+.car.winner { outline: 3px solid var(--accent); filter: drop-shadow(0 0 8px var(--accent)); }
+.car.player { box-shadow: 0 12px 26px rgba(255,173,96,.35), 0 10px 20px rgba(0,0,0,.5); }
+
+.result {
+  margin: 0 20px 20px; padding: 12px 16px; border-radius: 10px; background: #101531; border: 1px solid #2c3463;
+  font-weight: 700; letter-spacing: 0.3px;
+}
+
+@media (max-width: 640px) {
+  .app__header h1 { font-size: 18px; }
+  .car { --size: 72px; }
+  .finish-line { right: 50px; }
+  .controls { flex-direction: column; align-items: stretch; gap: 12px; }
+  .drive { grid-template-columns: repeat(2, 1fr); }
+  .buttons { justify-content: center; }
+  .lane { height: 100px; }
+  .car__name { top: -32px; font-size: 11px; }
+}
+
+@media (max-width: 390px) {
+  .drive { grid-template-columns: 1fr; }
+  .car { --size: 60px; }
+  .finish-line { right: 40px; }
+}
+
+
+
